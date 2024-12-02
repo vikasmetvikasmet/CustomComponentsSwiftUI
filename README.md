@@ -8,4 +8,5 @@ Native tab bar, scroll inside the tab. Red rectangle above the tab bar.
 
 The code is adaptive to different rectangle heights.
 
-https://github.com/user-attachments/assets/cc6ed71a-d7ea-4c41-b78d-30fd88ff32ac
+https://github.com/user-attachments/assets/5eacd85e-10f5-45be-a0ff-f86871735ec1
+
