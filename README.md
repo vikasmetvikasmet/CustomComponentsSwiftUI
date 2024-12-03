@@ -1,8 +1,11 @@
-# SwiftUICustomComponents
-> One branch - one custom component
-<div align="center">
-  <a href="https://github.com/vikasmetvikasmet">
-    <img src="https://github.com/user-attachments/assets/89d78c65-474e-455c-a9e8-2ea6931e5dc7" alt="Logo" width="300" height="150">
-  </a>
+# Mixed Text
 
-Repository for creating custom components on SwiftUI
+Text with different font sizes and colors. Below is a slider, it changes the width of the text container. The text container is outlined in red.
+
+- Container width from 100pt to 300pt.
+- Wraps words and letters if there is not enough space.
+- If the word can fit, it should be on the line above.
+
+https://github.com/user-attachments/assets/6b4135fe-60c8-4ceb-86a8-5c79f8bd5692
+
+
