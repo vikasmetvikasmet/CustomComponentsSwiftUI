@@ -16,6 +16,7 @@ struct Task_2: View {
                 .stroke(Color.red, lineWidth: 1)
                 .frame(width: widthRectangle)
                 .frame(height: 200)
+                
                 .overlay(
                     overlayContent
                 )
@@ -30,20 +31,26 @@ struct Task_2: View {
         }.frame(maxWidth: .infinity, alignment: .center)
         
     }
+    
     private var titleView: some View {
-        HStack{
+        HStack(spacing: 0) {
             Text("Марафон ")
+                .font(.system(size: 10))
                 .foregroundColor(.gray) +
-            Text("по SwiftUI")
+            Text("по")
+                .font(.system(size: 20)) +
+            Text(" SwiftUI")
+                .font(.system(size: 20))
         }.frame(maxWidth: .infinity, alignment: .leading)
             .padding(.leading, 5)
+           
     }
     private var subtitleView: some View {
         VStack {
             Text("«Отцовский пинок»")
                 .foregroundStyle(Color.blue)
                 .bold()
-                .font(.system(size: 30))
+                .font(.system(size: 25))
             
             
         }.frame(maxWidth: .infinity, alignment: .center)
