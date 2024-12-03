@@ -50,7 +50,7 @@ struct Task_2: View {
             Text("«Отцовский пинок»")
                 .foregroundStyle(Color.blue)
                 .bold()
-                .font(.system(size: 25))
+                .font(.system(size: 30))
             
             
         }.frame(maxWidth: .infinity, alignment: .center)
