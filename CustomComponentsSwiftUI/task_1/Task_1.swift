@@ -1,13 +1,18 @@
 //
-//  ContentView.swift
+//  Task_1.swift
 //  CustomComponentsSwiftUI
 //
-//  Created by Vika on 02.12.2024.
+//  Created by Vika on 03.12.2024.
 //
 
 import SwiftUI
 
-struct ContentView: View {
+//struct Task_1: View {
+//    var body: some View {
+//        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+//    }
+//}
+struct Task_1: View {
     var numbers: [Int] = Array(1...100)
     var body: some View {
         TabView {
@@ -47,5 +52,5 @@ struct BottomBar: View {
 }
 
 #Preview {
-    ContentView()
+    Task_1()
 }
