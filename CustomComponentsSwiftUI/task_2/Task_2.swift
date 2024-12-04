@@ -34,15 +34,14 @@ struct Task_2: View {
     
     private var titleView: some View {
         HStack(spacing: 0) {
-            Text("Марафон ")
-                .font(.system(size: 10))
+            Text("Марафон\u{00a0}")
+                .font(.callout)
                 .foregroundColor(.gray) +
-            Text("по")
-                .font(.system(size: 20)) +
-            Text(" SwiftUI")
-                .font(.system(size: 20))
+            Text("по SwiftUI")
+                .bold()
+                
         }.frame(maxWidth: .infinity, alignment: .leading)
-            .padding(.leading, 5)
+            .padding(.leading, 4)
            
     }
     private var subtitleView: some View {
@@ -50,7 +49,7 @@ struct Task_2: View {
             Text("«Отцовский пинок»")
                 .foregroundStyle(Color.blue)
                 .bold()
-                .font(.system(size: 25))
+                .font(.title)
             
             
         }.frame(maxWidth: .infinity, alignment: .center)
