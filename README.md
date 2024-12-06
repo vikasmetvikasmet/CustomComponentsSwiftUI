@@ -1,3 +1,4 @@
+
 # Next Track
 Animation of the button for the next track from Apple Music.
 
@@ -7,5 +8,3 @@ Animation of the button for the next track from Apple Music.
 
 
 https://github.com/user-attachments/assets/c6f42ac2-2913-40af-abcc-67e3d816552e
-
-
