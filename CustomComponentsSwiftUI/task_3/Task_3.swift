@@ -11,30 +11,41 @@ struct Task_3: View {
     @State private var isAnimating = false
     var body: some View {
         Button {
-            withAnimation(.bouncy) {
-                isAnimating = true
-            } completion: {
-                isAnimating = false
+            if !isAnimating {
+                withAnimation(.interpolatingSpring(stiffness: 170, damping: 15)) {
+                    isAnimating = true
+                } completion: {
+                    isAnimating = false
+                }
             }
         } label: {
-            HStack(spacing: 0) {
-                Image(systemName: "play.fill")
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: isAnimating ? 50: 0)
-                Image(systemName: "play.fill")
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 50)
-                Image(systemName: "play.fill")
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: isAnimating ? 1 : 50)
-                    .opacity(isAnimating ? 0 : 1)
-            }
-            
+            GeometryReader { proxy in
+                let width = proxy.size.width / 2
+                let systemName = "play.fill"
+                
+                HStack(alignment: .center, spacing: 0) {
+                    Image(systemName: systemName)
+                        .renderingMode(.template)
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: isAnimating ?  width: .zero)
+                        .opacity(isAnimating ? 1 : .zero)
+                    Image(systemName: systemName)
+                        .renderingMode(.template)
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: width)
+                    Image(systemName: systemName)
+                        .renderingMode(.template)
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: isAnimating ? 0.5 : width)
+                        .opacity(isAnimating ? .zero: 1)
+                }
+                .frame(maxHeight: .infinity, alignment: .center)
+                
+            }.frame(maxWidth: 62)
         }
-
     }
 }
 
