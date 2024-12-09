@@ -20,10 +20,11 @@ struct Task_2: View {
                 .overlay(
                     overlayContent
                 )
-            Slider(value: $widthRectangle, in: 100...300, step: 50.0)
+            Slider(value: $widthRectangle, in: 100...300)
                 .padding(10)
         }
     }
+    @ViewBuilder
     private var overlayContent: some View {
         VStack {
             titleView

@@ -1,12 +1,10 @@
-# SwiftUICustomComponents
-> One branch - one custom component
-<div align="center">
-  <a href="https://github.com/vikasmetvikasmet">
-    <img src="https://github.com/user-attachments/assets/6a72eab8-29cc-4416-ba9e-28a4de03d8f7" alt="Logo" width="300" height="150">
-  </a>
-  </div>
 
-<div align="center">  
-Repository for creating custom components on SwiftUI
-</div>
+# Next Track
+Animation of the button for the next track from Apple Music.
 
+- Using Button. No gestures
+- On each press, only this animation occurs. Not once. No reverse animations
+- The icon has an inertial bounce at the end of the animation
+
+
+https://github.com/user-attachments/assets/c6f42ac2-2913-40af-abcc-67e3d816552e

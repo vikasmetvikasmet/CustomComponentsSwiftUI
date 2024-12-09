@@ -11,7 +11,7 @@ import SwiftUI
 struct CustomComponentsSwiftUIApp: App {
     var body: some Scene {
         WindowGroup {
-            Task_2()
+            Task_3()
         }
     }
 }
