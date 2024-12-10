@@ -15,52 +15,64 @@ struct Task_4: View {
                 withAnimation(.interpolatingSpring(stiffness: 170, damping: 15)) {
                     isAnimating = true
                 }
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.22) {
+                completion: {
                     isAnimating = false
                 }
             }
         } label: {
-            ZStack {
-                Circle()
-                    .fill(Color.gray.opacity(0.3))
-                    .frame(width: 70, height: 70)
-                    .frame(maxHeight: .infinity, alignment: .center)
-                    .opacity(isAnimating ? 1: .zero)
+            GeometryReader { proxy in
+                let width = proxy.size.width / 2
+                let systemName = "play.fill"
                 
-                GeometryReader { proxy in
-                    let width = proxy.size.width / 2
-                    let systemName = "play.fill"
+                HStack(alignment: .center, spacing: 0) {
+                    Image(systemName: systemName)
+                        .renderingMode(.template)
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: isAnimating ?  width: .zero)
+                        .opacity(isAnimating ? 1 : .zero)
+                        .foregroundColor(Color.black)
                     
-                    HStack(alignment: .center, spacing: 0) {
-                        Image(systemName: systemName)
-                            .renderingMode(.template)
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: isAnimating ?  width: .zero)
-                            .opacity(isAnimating ? 1 : .zero)
-                            .foregroundColor(Color.black)
-                        
-                        Image(systemName: systemName)
-                            .renderingMode(.template)
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: width)
-                            .foregroundColor(Color.black)
-                        
-                        Image(systemName: systemName)
-                            .renderingMode(.template)
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: isAnimating ? 0.5 : width)
-                            .opacity(isAnimating ? .zero : 1)
-                            .foregroundColor(Color.black)
-                    }
+                    Image(systemName: systemName)
+                        .renderingMode(.template)
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: width)
+                        .foregroundColor(Color.black)
+                    
+                    Image(systemName: systemName)
+                        .renderingMode(.template)
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: isAnimating ? 0.5 : width)
+                        .opacity(isAnimating ? .zero : 1)
+                        .foregroundColor(Color.black)
+                }
+                .frame(maxHeight: .infinity, alignment: .center)
+                
+            }.frame(maxWidth: 62)
+        }.buttonStyle(CustomButtonStyle(isAnimating: $isAnimating))
+    }
+}
+
+struct CustomButtonStyle: ButtonStyle {
+    @Binding var isAnimating: Bool
+    private let animationDuration: CGFloat = 0.22
+    private let backgroundColor: Color = Color.gray.opacity(0.3)
+    private let buttonSize: CGFloat = 70
+    
+    func makeBody(configuration: Configuration) -> some View {
+        
+        configuration.label
+            .scaleEffect(isAnimating ? 0.86 : 1)
+            .background{
+                Circle()
+                    .fill(backgroundColor)
+                    .frame(width: buttonSize, height: buttonSize)
                     .frame(maxHeight: .infinity, alignment: .center)
-                    .scaleEffect(isAnimating ? 0.86 : 1)
-                    
-                }.frame(maxWidth: 62)
+                    .opacity(isAnimating ? 1: 0)
+                    .animation(.easeInOut(duration: animationDuration), value: isAnimating)
             }
-        }
     }
 }
 
