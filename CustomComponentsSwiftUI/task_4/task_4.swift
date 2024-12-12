@@ -8,6 +8,13 @@
 import SwiftUI
 
 struct Task_4: View {
+    var body: some View {
+        ForwardButton()
+            .buttonStyle(PressButtonStyle())
+    }
+}
+
+struct ForwardButton: View {
     @State private var isAnimating = false
     var body: some View {
         Button {
@@ -51,28 +58,41 @@ struct Task_4: View {
                 .frame(maxHeight: .infinity, alignment: .center)
                 
             }.frame(maxWidth: 62)
-        }.buttonStyle(CustomButtonStyle(isAnimating: $isAnimating))
+        }
     }
 }
 
-struct CustomButtonStyle: ButtonStyle {
-    @Binding var isAnimating: Bool
-    private let animationDuration: CGFloat = 0.22
-    private let backgroundColor: Color = Color.gray.opacity(0.3)
-    private let buttonSize: CGFloat = 70
+struct PressButtonStyle: ButtonStyle {
+    @State private var isProcessingPressBackground: Bool = false
+    
+    let duration: TimeInterval = 0.22
+    let scale: CGFloat = 0.86
+    let buttonSize: CGFloat = 80
     
     func makeBody(configuration: Configuration) -> some View {
-        
-        configuration.label
-            .scaleEffect(isAnimating ? 0.86 : 1)
-            .background{
-                Circle()
-                    .fill(backgroundColor)
-                    .frame(width: buttonSize, height: buttonSize)
-                    .frame(maxHeight: .infinity, alignment: .center)
-                    .opacity(isAnimating ? 1: 0)
-                    .animation(.easeInOut(duration: animationDuration), value: isAnimating)
+        ZStack {
+            Circle()
+                .foregroundColor(.secondary)
+                .frame(maxWidth: buttonSize, maxHeight: buttonSize)
+                .opacity(isProcessingPressBackground ? 0.3 : 0)
+            configuration.label
+                .padding(12)
+        }
+        .scaleEffect(isProcessingPressBackground ? scale : 1)
+        .animation(.easeOut(duration: duration), value: configuration.isPressed)
+        .onChange(of: configuration.isPressed) { newValue in
+            if newValue {
+                withAnimation(.easeOut(duration: duration)) {
+                    isProcessingPressBackground = true
+                }
+            } else {
+                DispatchQueue.main.asyncAfter(deadline: .now() + duration) {
+                withAnimation(.easeOut(duration: 0)) {
+                        isProcessingPressBackground = false
+                    }
+                }
             }
+        }
     }
 }
 
