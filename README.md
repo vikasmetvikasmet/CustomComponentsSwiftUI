@@ -1,12 +1,13 @@
-# SwiftUICustomComponents
-> One branch - one custom component
-<div align="center">
-  <a href="https://github.com/vikasmetvikasmet">
-    <img src="https://github.com/user-attachments/assets/28ce92b5-182e-499f-b282-1dff4a626ec6" alt="Logo" width="300" height="150">
-  </a>
-  </div>
-  <div align="center">  
-Repository for creating custom components on SwiftUI
-</div>
+# Noticeable Square
 
+There are 4 colored rectangles on the screen. The square is dragged from above.
+
+- Background colors [Color.white, .pink, .yellow, .black]
+- On dark colors the square is white, on light colors it is black
+- Without using mask. The gesture is not interrupted between colors
+
+https://github.com/user-attachments/assets/2d2396d9-6f5e-49ec-a6ff-36518f01aafa
+
+
+  
 
