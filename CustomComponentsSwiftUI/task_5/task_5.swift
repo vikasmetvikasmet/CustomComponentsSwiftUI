@@ -8,42 +8,52 @@
 import SwiftUI
 
 struct Task_5: View {
-    let height = UIScreen.main.bounds.height * 0.25
-    @State var position = CGPoint(
-        x: UIScreen.main.bounds.midX,
-        y: UIScreen.main.bounds.midY
-    )
-    let colors: [Color] = [Color.white, .pink, .yellow, .black]
+    var dragView: some View {
+        Rectangle()
+            .clipShape(.rect(cornerRadius: 12))
+            .frame(width: 100, height: 100)
+    }
+    
+    @State var offset: CGSize = .zero
     var body: some View {
-        
         ZStack {
-            
             VStack(spacing: 0) {
-                ForEach(colors, id: \.self ) { color in
-                    Rectangle()
-                        .fill(color)
-                        .frame(height: height)
-                }
+                Color.white
+                Color.pink
+                Color.yellow
+                Color.black
             }
+            .ignoresSafeArea()
             
-            Color.white
+            dragView.foregroundColor(.white)
                 .blendMode(.difference)
                 .overlay {
-                    Rectangle()
-                        .overlay(.white.blendMode(.overlay))
-                        .overlay(.black.blendMode(.overlay))
+                    dragView.foregroundColor(.white)
+                        .blendMode(.hue)
                 }
-                .blendMode(.saturation)
-                .frame(width: 100, height: 100)
-                .cornerRadius(10)
-                .position(x: position.x, y: position.y)
+                .overlay {
+                    dragView.foregroundColor(.white)
+                        .blendMode(.overlay)
+                }
+                .overlay {
+                    dragView.foregroundColor(.black)
+                        .blendMode(.overlay)
+                }
+                .offset(x: offset.width, y: offset.height)
                 .gesture(
-                    DragGesture().onChanged { position = $0.location }
+                    DragGesture()
+                        .onChanged({ value  in
+                            offset = value.translation
+                        })
+                        .onEnded({ value in
+                            withAnimation {
+                                offset = .zero
+                            }
+                        })
                 )
         }
     }
 }
-
 #Preview {
     Task_5()
 }
