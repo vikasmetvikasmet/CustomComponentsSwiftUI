@@ -8,36 +8,43 @@
 import SwiftUI
 
 struct Task_6: View {
-    @State var isVertical = false
-    private let spacing: CGFloat = 5
+    @State private var horizontal: Bool = true
     private let countRectangle = 7
     
     var body: some View {
-        GeometryReader { proxy in
-            let width = proxy.size.width
-            let height = proxy.size.height
-            let size = isVertical
-                ? height / CGFloat(countRectangle)
-                : (width - spacing * CGFloat(countRectangle - 1)) / CGFloat(countRectangle)
-            
-            ForEach(0..<countRectangle, id: \.self) { index in
-                Rectangle()
-                    .fill(.blue)
-                    .frame(width: size, height: size)
-                    .cornerRadius(8)
-                    .offset(
-                        x: isVertical
-                            ? (size - (height - width) / CGFloat(countRectangle - 1)) * CGFloat(index)
-                            : CGFloat(index) * size + spacing * CGFloat(index),
-                        y: isVertical
-                            ? height - size * (CGFloat(index) + 1)
-                            : height / 2 - size / 2
-                    ).onTapGesture {
-                        withAnimation {
-                            isVertical.toggle()
-                        }
-                    }
+        
+        let layout = horizontal ? AnyLayout(HStackLayout()) : AnyLayout(DiagonalLayout())
+        layout {
+            ForEach(0 ..< countRectangle) { i in
+                RoundedRectangle(cornerRadius: 12)
+                    .fill(.tint)
+                    .aspectRatio(1, contentMode: .fit)
             }
+        }
+        .onTapGesture {
+            withAnimation {
+                horizontal.toggle()
+            }
+        }
+    }
+}
+
+struct DiagonalLayout: Layout {
+    func sizeThatFits(proposal: ProposedViewSize, subviews: Subviews, cache: inout ()) -> CGSize {
+        proposal.replacingUnspecifiedDimensions()
+    }
+    func placeSubviews(in bounds: CGRect, proposal: ProposedViewSize, subviews: Subviews, cache: inout ()) {
+        let count = subviews.count
+        let height = bounds.height / CGFloat(count)
+        
+        let wStep = (bounds.width - height) / CGFloat(count - 1)
+        
+        for (index,view) in subviews.enumerated() {
+            view.place(
+                at: .init(
+                    x: CGFloat(index) * wStep + bounds.minX,
+                    y: (bounds.maxY - height) - (height * CGFloat(index))),
+                proposal: .init (width: height, height: height))
         }
     }
 }
