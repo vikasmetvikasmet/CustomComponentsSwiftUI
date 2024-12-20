@@ -21,26 +21,24 @@ struct Task_7: View {
                 .frame(width: rectangleWidth, height: rectangleHeight)
                 .cornerRadius(rectangleCornerRadius)
                 .offset(x: rectangleOffset.width, y: rectangleOffset.height)
+                
             Button {
                 withAnimation {
                     isPressing.toggle()
+                    
                 }
             } label: {
-                if isPressing {
-                    Text("Open")
-                        .foregroundColor(.white)
-                        .font(.system(size: 20, weight: .medium))
-                        .font(.headline)
-                        .opacity(isPressing ? 1 : 0)
-                        .frame(width: rectangleOffset.width, height: rectangleOffset.height)
-                } else {
-                    Label("Back", systemImage: "arrowshape.backward.fill")
-                        .font(.system(size: 20, weight: .medium))
-                        .foregroundColor(.white)
-                        .font(.headline)
-                        .opacity(isPressing ? 0 : 1)
-                }
+                Text(isPressing ? "Open" : "\(Image(systemName: "arrowshape.backward.fill")) Back")
+                    .foregroundColor(.white)
+                    .font(.system(size: 20, weight: .medium))
+                    .font(.headline)
+                    .contentTransition(.identity)
+                    .frame(width: isPressing ? rectangleOffset.width : nil,
+                               height: isPressing ? rectangleOffset.height : nil)
+                
             }.offset(x: isPressing ? rectangleOffset.width : -100, y: isPressing ?  rectangleOffset.height : -170)
+                .transition(.identity)
+                .scaledToFill()
         }
     }
 }
