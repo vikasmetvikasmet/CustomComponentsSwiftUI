@@ -9,6 +9,7 @@ import SwiftUI
 
 struct Task_7: View {
     @State private var isPressing =  true
+    @Namespace var transition: Namespace.ID
     private var rectangleWidth: CGFloat { isPressing ? 110 : 300 }
     private var rectangleHeight: CGFloat { isPressing ? 60 : 400 }
     private var rectangleCornerRadius: CGFloat { isPressing ? 10 : 20 }
@@ -16,12 +17,12 @@ struct Task_7: View {
     
     var body: some View {
         ZStack {
-            Rectangle()
-                .foregroundColor(.blue)
+            RoundedRectangle(cornerRadius: rectangleCornerRadius)
+                .fill(Color.accentColor)
+                .matchedGeometryEffect(id: "bg", in: transition)
                 .frame(width: rectangleWidth, height: rectangleHeight)
-                .cornerRadius(rectangleCornerRadius)
                 .offset(x: rectangleOffset.width, y: rectangleOffset.height)
-                
+               
             Button {
                 withAnimation {
                     isPressing.toggle()
@@ -29,10 +30,10 @@ struct Task_7: View {
                 }
             } label: {
                 Text(isPressing ? "Open" : "\(Image(systemName: "arrowshape.backward.fill")) Back")
+                    .matchedGeometryEffect(id: "title", in: transition)
                     .foregroundColor(.white)
                     .font(.system(size: 20, weight: .medium))
                     .font(.headline)
-                    .contentTransition(.identity)
                     .frame(width: isPressing ? rectangleOffset.width : nil,
                                height: isPressing ? rectangleOffset.height : nil)
                 
