@@ -1,12 +1,11 @@
-# SwiftUICustomComponents
-> One branch - one custom component
-<div align="center">
-  <a href="https://github.com/vikasmetvikasmet">
-    <img src="https://github.com/user-attachments/assets/28ce92b5-182e-499f-b282-1dff4a626ec6" alt="Logo" width="300" height="150">
-  </a>
-  </div>
-  <div align="center">  
-Repository for creating custom components on SwiftUI
-</div>
+# Turn up the volume
+Vertical slider. Interacts with the gesture. Behaves like the volume indicator in the iPhone control center.
+
+- Slider background is black ultraThinMaterial
+- At extreme values, the slider stretches in the direction of the gesture.
+- When we release the slider, it returns to its original state.
+
+https://github.com/user-attachments/assets/87cf8cf5-1af7-4081-953d-d41e1b9d7df7
 
 
+  
